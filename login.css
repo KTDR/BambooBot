@@ -92,3 +92,18 @@ img.avatar {
 #up_size{
     font-size: large;
 }
+
+@media screen and (max-width: 481px){
+
+form {
+    text-align: center;
+    margin: auto;
+    font-family: Bodoni MT,Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif; 
+    color: silver;
+    background-color: #00000080;
+    width: 40%;
+    height: 20%;
+    resize: vertical;
+}
+
+}
