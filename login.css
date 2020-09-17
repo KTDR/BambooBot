@@ -1,11 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
 form {
-    position: absolute;
+    
     text-align: center;
-    margin-top: 0.5%;
-    margin-left: 17.5%;
+    margin: auto;
+    margin-top: 5%;
     font-family: Bodoni MT,Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif; 
     color: silver;
+    background-color: #00000080;
+    width: 40%;
+    height: 20%;
+    resize: both;
 }
+
 
 #bgVideo {
   position: fixed;
@@ -21,14 +30,13 @@ form {
     color: silver;
     font-size: 0.5in;
     font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif; 
-    margin-right: 2%;
-    margin-top: 0%;
+    margin-top:-5%;
 }
 
 #logo{
     float: right;
     margin-right: 0%;
-    margin-top: 0.20%;
+    margin-top: -4.85%;
 }
 
 #discord_color{ 
@@ -37,7 +45,7 @@ form {
 
 input[type=text], input[type=password] {
   text-align: center;
-  width: 50%;
+  width: 75%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -53,7 +61,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 75%;
   font-size: large;
 }
 
@@ -75,9 +83,10 @@ img.avatar {
 .loginInfo{
     padding: 16px;
 }
+
 #hyp_links{
   color: silver;
-    font-size: large;
+  font-size: large;
 }
 
 #up_size{
