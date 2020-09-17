@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="login.css">
+    <body>
+        <video autoplay muted loop id="bgVideo">
+        <source src="siteBG.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+        </video>
+        <h1 id="header">Bamboo</h1>
+        <img src="Picture1.png" id="logo" alt="Bamboo Logo" width="50" height="50">
+
+
+
+        <form action="/log_action.php" method="post">
+            <div class = "textPrompt">
+                <h2>
+                    BambooBot
+                 </h2>
+                 <p>               
+                    If you have an account login here!
+                </p>
+            </div>
+
+            <div>
+                <img src="avatar_login.png" alt="Avatar" class="avatar"></img>
+            </div>
+            <div class = "loginInfo">
+                <label id="up_size" for="fname">Username/Email</label><br>
+                <input type="text" placeholder="Enter Username/Email" id="uName" name="fname"><br>
+                <label id="up_size" for="lname">Password</label><br>
+                <input type="password" placeholder="Enter Password" id="pWord" name="lname"><br><br>
+                <button type="submit">Login</button><br>
+                <a id="hyp_links" href="sendEmail.html">Forgot your passsword ?<br><br></a>
+                        
+                <a id="hyp_links" href = "makeAccount.html">Register</a>    
+            </div>
+            
+        </form>         
+
+    </body>
+
+</html>
