@@ -93,11 +93,11 @@ img.avatar {
     font-size: large;
 }
 
-@media screen and (max-width: 481px){
+@media screen and (max-width: 600px){
 
 form {
     text-align: center;
-    margin: auto;
+    margin: left;
     font-family: Bodoni MT,Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif; 
     color: silver;
     background-color: #00000080;
@@ -107,4 +107,60 @@ form {
 }
 
 
+.textPrompt{
+    font-size: large;
+    text-align: center;
+}
+
+.loginInfo{
+    padding: 8;
+}
+
+#hyp_links{
+  color: silver;
+  font-size: medium;
+}
+
+#up_size{
+    font-size: medium;
+}
+#header{
+    float: right;
+    color: silver;
+    font-size: 0.5in;
+    font-family: Didot,Didot LT STD,Hoefler Text,Garamond,Times New Roman,serif; 
+    margin-top:-5%;
+}
+
+#logo{
+    float: right;
+    margin-right: 0%;
+    margin-top: -2.75%;
+}
+
+#discord_color{ 
+    color: silver;
+}
+
+input[type=text], input[type=password] {
+  text-align: center;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: medium;
+}
+
+button {
+  background-color: darkblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: medium;
+}
 }
