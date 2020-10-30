@@ -180,21 +180,16 @@ const functions = {
         let rowCount = data.length;
         let columnCount = data[0].length;
         let longestInColumn: number[] = new Array(columnCount).fill(0); //Tracks the longest element found in each column
-        console.log(`Row generation: ${rowCount}`);
-        console.log(`Column generation: ${columnCount}`);
-        console.log(`Initial value of column counter array: ${longestInColumn.toString()}`);
         
+        //getting the longest element of each column
         for (let i=0; i < rowCount; i++) {
-            console.log(`Checking ${data[i]}`);
             for (let j=0; j < columnCount; j++) {
-                console.log(`Checking sub-element ${data[i][j]}`);
                 if (data[i][j].length > longestInColumn[j]) {
                     longestInColumn[j] = data[i][j].length;
-                    console.log(`Determined longest element in column ${j} to be ${longestInColumn[j]}`)
                 }
             }
         }
-        console.log(`Calculated longest column values: ${longestInColumn}`);
+
         //Begin padding all the strings
         //TODO: Check for built in array copy function
         for (let i=0; i < rowCount; i++) {
@@ -202,14 +197,13 @@ const functions = {
             for (let j=0; j < columnCount; j++) {
                 newStringArray[i][j] = data[i][j];  //Copy the string in to begin with
                 if (j != columnCount-1) {   //The last element in the row doesn't need padding at the end
-                    console.log(`Padding subelement ${data[i][j]}`);
                     newStringArray[i][j] = newStringArray[i][j].padEnd(longestInColumn[j]+gapSize, ' ');
                 }
             }
             //Finally build the formatted 1D array, row by row
             formattedArray[i] = rowPrefix + newStringArray[i].join('');
         }
-        console.log("Formatted:\n" + formattedArray.join('\n'));
+        //console.log("Formatted:\n" + formattedArray.join('\n'));
         return formattedArray;
     }
 }

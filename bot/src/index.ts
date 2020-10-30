@@ -36,13 +36,13 @@ client.on('ready', () => {  //activates when bot starts up, and logs its name to
 });
 
 
-client.on('reconnecting', () => { //Emitted when client tries to auto reconnect.
-    console.log("Client lost connection to Discord. Auto-reconnecting...");
+client.on('reconnecting', (shardID) => { //Emitted when client tries to auto reconnect.
+    console.log(`Shard[${shardID}] lost connection to Discord. Auto-reconnecting...`);
 });
 
-// client.on('resume', (shardID) => {
-//     console.log(`Shard[${shardID}] resumed.`)
-// })
+client.on('resume', (shardID) => {
+    console.log(`Shard[${shardID}] resumed.`)
+})
 
 client.on('disconnect', () => { //Emitted when the client's WebSocket disconnects and will no longer attempt to reconnect.
     console.log("Bot could not connect to Discord API. Reconnecting at next opportunity.");
