@@ -164,9 +164,8 @@ client.on('message', async (msg: Discord.Message) => {
             }
             else {
                 let responseArray: String[] = await DB.getAssignments(args[0]);
-                console.log("Index return: [" + responseArray + ']');
-                if (responseArray.length == 0) channel.send("fail.");
-                channel.send(Util.codeblockWrap(responseArray.join('\n')));
+                if (responseArray.length == 0) channel.send(Util.codeblockWrap(`${args[0]} has no assignments.`));
+                else channel.send(Util.codeblockWrap(responseArray.join('\n')));
             }
         }
         if (command === "addassignment" && active) {
