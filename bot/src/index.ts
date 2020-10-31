@@ -40,9 +40,10 @@ client.on('reconnecting', () => { //Emitted when client tries to auto reconnect.
     console.log(`Client lost WebSocket connection to Discord. Auto-reconnecting...`);
 });
 
+let resumeCount = 0;
 client.on('resume', (replays) => {
-    console.log(`WebSocket connection resumed, ${replays}.`)
-})
+    console.log(`WebSocket connection resumed, ${replays} replays. Total resumes this session: [${++resumeCount}]`);
+});
 
 // Emitted for general warnings. 
 client.on("warn", (info) => {
