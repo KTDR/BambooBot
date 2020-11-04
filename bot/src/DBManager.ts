@@ -1,8 +1,12 @@
 //This module controls access to the various databases. Defined as a class so it can be instantiated more than once, for access to more than one database
-import mongoose from 'mongoose';   //Mongoose libary is used to access MongoDB databases.
-import creds = require("./config/creds.json") //The contents of this variable should NEVER be visible to users.
+import mongoose, { Mongoose } from 'mongoose';   //Mongoose libary is used to access MongoDB databases.
 import MongoDB_Schemas = require("./schemas_mongoDB");
+import fs from "fs";   //imports node.js module that allows read/write of files
+import path from 'path';
+import Util = require('./MyDiscordUtils') ; //importing frequently used functions 
 
+let credsPath = path.join(__dirname,'..','config','creds.yaml');
+const creds = Util.getYAMLObj(credsPath);
 
 class DBManager {
     DBType: string;   //Determines the database being connected to. mongoDB for now
@@ -11,10 +15,11 @@ class DBManager {
     constructor(databaseType = "mongoDB") {
         this.DBType = databaseType;
         let cluster = "cluster0";
-        let DBName = 'bamboo_bot';
-        //let connectionURL = `mongodb+srv://${creds.Database_username}:${creds.Database_password}@${cluster}.88lzo.azure.mongodb.net/${DBName}?retryWrites=true&w=majority`;
-        let connectionURL = `mongodb+srv://bamboo_bot:teammars@cluster0.88lzo.azure.mongodb.net/bamboo_bot?retryWrites=true&w=majority`;
-        mongoose.connect(connectionURL, { useNewUrlParser: true , useUnifiedTopology: true}) //Connect to DB
+        let DBname = 'bamboo_bot'; //Name of the database to be connected to
+        let DBusername = creds.MongoDB_username;
+        let DBpassword = creds.MongoDB_password;
+        let connectionURL = `mongodb+srv://${DBusername}:${DBpassword}@${cluster}.88lzo.azure.mongodb.net/${DBname}?retryWrites=true&w=majority`;
+        mongoose.connect(connectionURL, { useNewUrlParser: true , useUnifiedTopology: true}) //Connect to MongoDB Atlas instance
         .then(() => console.log("Database connected."))
         .catch(error => console.error("Failed to connect to database " + error));   
         this.connection = mongoose.connection;

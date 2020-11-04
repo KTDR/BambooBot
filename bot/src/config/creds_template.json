@@ -1,9 +1,0 @@
-{
-    "DESCRIPTION":  "Make a copy of this file, rename it to 'creds.json', and fill in the necessary info to login to services.",
-
-    "Discord_secret" :    "",
-    "Discord_token":    "",
-
-    "Database_username": "",
-    "Database_password": ""
-}

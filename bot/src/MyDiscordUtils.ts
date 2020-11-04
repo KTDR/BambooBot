@@ -3,9 +3,14 @@
  */
 import {DiscordClient as client} from './index'; //imports client from main program file
 import Discord = require('discord.js'); //For type definitions TODO: Ensure this is not being loaded in the compiled .js file as it is not used in runtime here
-import configAdmin = require('./config/config-admin.json');
+import fs from "fs";   //imports node.js module that allows read/write of files
+import path from 'path';
+import yaml from 'js-yaml'; //For parsing YAML formatted config files
 
-const functions = {
+let configPath = path.join(__dirname,'..','config','config-admin.yaml');
+let configAdmin: any = yaml.safeLoad(fs.readFileSync(configPath, 'utf8'));
+
+var functions = {
 
     /**
      * Formats a string to a codeblock for discord messages
@@ -205,6 +210,24 @@ const functions = {
         }
         //console.log("Formatted:\n" + formattedArray.join('\n'));
         return formattedArray;
+    },
+    /**
+     * Parses a YAML format file at specified path to a Javascript Object and returns it. 
+     * 
+     * Synchronous
+     * @param filePath string containing a path to the YAML file
+     * @returns Parsed object, or null if parse fails
+     */
+    getYAMLObj(filePath: string) {
+        let parsedObj = null;
+        try {
+            parsedObj = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
+        }
+        catch (e) {
+            console.log(`Failed to parse YAML file at ${filePath}, error: ${e}`);
+        }
+        return parsedObj;
     }
 }
+
 export = functions;

@@ -116,7 +116,10 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 # Prevent credentials from being pushed to repo
-creds.json
+creds.*
 
 # Don't need Typescript compiler output pushed to repo, that should be compiled when needed
 /build
+
+# Just personal links and coding info that I don't need pushed to the repo
+myresources.txt

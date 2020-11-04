@@ -1,0 +1,9 @@
+---
+# Generated with https://www.json2yaml.com/convert-yaml-to-json
+# Make a copy of this file, rename it to 'creds.yaml', and fill in the necessary info to login to services.
+# DO NOT ALLOW USERS VIEW THE CONTENTS OF THESE VARIABLES.
+Discord_secret: ''
+Discord_token: ''
+
+MongoDB_username: ''
+MongoDB_password: ''

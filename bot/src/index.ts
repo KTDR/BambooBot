@@ -1,17 +1,16 @@
 //require('app-module-path').addPath(__dirname); //Makes managing file paths MUCH easier, https://github.com/patrick-steele-idem/app-module-path-node
-import config = require("./config/config-admin.json")
-import creds = require("./config/creds.json") //The contents of this variable should NEVER be visible to users.
-import Discord = require("discord.js");  //imports Discord client class TYPESCRIPT SPECIFIC https://www.typescriptlang.org/docs/handbook/modules.html
+import Discord from "discord.js";  //imports Discord client class TYPESCRIPT SPECIFIC https://www.typescriptlang.org/docs/handbook/modules.html
+import fs from 'fs';
+import path from 'path';
 import Util = require('./MyDiscordUtils') ; //importing frequently used functions 
 import DBManager = require("./DBManager");
-
-import fs from "fs";   //imports node.js module that allows read/write of files
-import { format } from "path";
 
 const client = new Discord.Client();    //initializes discord.js client object
 var owner: Discord.User = undefined;   //to hold discord user object for bot owner, user ID hardcoded into config.json for now.
 var DB: DBManager;  
 
+const config = Util.getYAMLObj(path.join(__dirname,'..','config','config-admin.yaml'));    //Load the Bot configuration
+const creds = Util.getYAMLObj(path.join(__dirname,'..','config','creds.yaml'));    //Load in credentials //Content of this variable should NEVER be exposed to users
 connectionManager("login"); //initial discord bot login
 
 client.on('ready', () => {  //activates when bot starts up, and logs its name to the terminal
@@ -28,10 +27,10 @@ client.on('ready', () => {  //activates when bot starts up, and logs its name to
             console.log("Invite link: " + link);
             console.timeEnd('invitelinkclient');    //Log the delay when getting invite link from Discord API 
         });
-    setActivity();
 
-    //Post-login initialization steps here
+    //Post-login initialization tasks here
     DB = new DBManager();
+    setActivity();
 
 });
 
@@ -253,5 +252,4 @@ function connectionManager(param: string) {
     }
     return false;   //Since it's passed to setInterval() as a callback it needs to return a bool, false so it never stops, risky TODO: consider wrapping in bool function
 }
-
-export { client as DiscordClient};    //So that other modules can use the logged in client for both twitch and discord TODO: Client login in its own module
+export { client as DiscordClient}; 

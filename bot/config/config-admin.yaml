@@ -1,0 +1,19 @@
+---
+BOT_NAME_VERSION: Bamboo Bot 0.0.1
+owner: '106670513434165248' # Discord ID of User who has full control of bot
+adminServer: '761328914688638996' # ID of Discord Server used to manage the Bot
+prefix: "!" # Prefix for Bot commands
+Discord_clientID: '770790633694167050' # Discord ID of the Bot itself
+
+# Below defines IDs of certain Channels/Categories within adminServer that Bot will read to/from for special features 
+adminChannelCategory: '000000000000000000'
+consoleChannel: '000000000000000000'
+authorizationRequestsChannel: '000000000000000000'
+featureRequestsChannel: '000000000000000000'
+bugReportsChannel: '000000000000000000'
+logChannel: '770810902404005909'
+
+# Bot will only be activated on a Discord Server with an ID in the array below
+testingServers:
+- '761328914688638996'
+- '770865316251172865'
