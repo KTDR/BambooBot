@@ -13,21 +13,20 @@ const config = Util.getYAMLObj(path.join(__dirname,'..','config','config-admin.y
 const creds = Util.getYAMLObj(path.join(__dirname,'..','config','creds.yaml'));    //Load in credentials //Content of this variable should NEVER be exposed to users
 connectionManager("login"); //initial discord bot login
 
-client.on('ready', () => {  //activates when bot starts up, and logs its name to the terminal
-    client.fetchUser(config.owner)  //finds specified bot owner by user ID
+client.on('ready', async () => {  //activates when bot starts up, and logs its name to the terminal
+    await client.fetchUser(config.owner)  //finds specified bot owner by user ID
         .then(user => owner = user) //stores desired bot owner as a discord user object into the owner variable
         .then(user => console.log("Owner set to " + user.username))
-        .then(user => console.log("Active in " + client.guilds.size + " servers."))
+        .then(() => console.log("Active in " + client.guilds.size + " servers."))
         .catch((error: string) => console.log("Could not locate specified bot owner due to error " + error));
     console.log(`Logged in as ${client.user.tag}!`);
     
     console.time('invitelinkclient');
-    client.generateInvite()
+    await client.generateInvite()
         .then(link => {
             console.log("Invite link: " + link);
             console.timeEnd('invitelinkclient');    //Log the delay when getting invite link from Discord API 
         });
-
     //Post-login initialization tasks here
     DB = new DBManager();
     setActivity();
