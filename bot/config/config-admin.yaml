@@ -11,7 +11,7 @@ consoleChannel: '000000000000000000'
 authorizationRequestsChannel: '000000000000000000'
 featureRequestsChannel: '000000000000000000'
 bugReportsChannel: '000000000000000000'
-logChannel: '770810902404005909'
+logChannel: '774426820199448607'
 
 # Bot will only be activated on a Discord Server with an ID in the array below
 testingServers:

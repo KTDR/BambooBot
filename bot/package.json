@@ -11,7 +11,8 @@
     "tsc": "tsc",
     "start": "node build/index.js",
     "tester": "tsc & node build/tester.js",
-    "go": "tsc & node build/index.js"
+    "go": "tsc & node build/index.js",
+    "perpetual": "tsc & npx pm2 start build/index.js --no-daemon --kill-timeout 70000 --shutdown-with-message"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
     "discord.js": "^11.4.2",
     "js-yaml": "^3.14.0",
     "mongoose": "^5.10.11",
+    "pm2": "^4.5.0",
     "string-hash": "^1.1.3"
   },
   "devDependencies": {

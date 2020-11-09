@@ -20,6 +20,7 @@ client.on('ready', async () => {  //activates when bot starts up, and logs its n
         .then(() => console.log("Active in " + client.guilds.size + " servers."))
         .catch((error: string) => console.log("Could not locate specified bot owner due to error " + error));
     console.log(`Logged in as ${client.user.tag}!`);
+    Util.myLogger( "Bot logged in.", 'REMOTE' );
     
     console.time('invitelinkclient');
     await client.generateInvite()
@@ -251,4 +252,16 @@ function connectionManager(param: string) {
     }
     return false;   //Since it's passed to setInterval() as a callback it needs to return a bool, false so it never stops, risky TODO: consider wrapping in bool function
 }
+
+//Ctrl+c sends a SIGINT on Linux platforms, emulated on Windows only when launched directly with Node
+process.on('SIGINT', async function() {
+    await Util.myLogger("Received SIGINT. shutting down.", 'BOTH');
+    process.exit();
+});
+
+//Package.json is configured PM2 to send a 'shutdown' message prior to process kill.
+process.on('message', async function(msg) {
+    await Util.myLogger('Received shutdown signal from PM2', 'BOTH');
+    process.exit();
+});
 export { client as DiscordClient}; 

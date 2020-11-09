@@ -57,7 +57,7 @@ export function codeblockUnwrap(str: string): string {
  * @param content Object to be logged
  * @param destination 'LOCAL' or 'REMOTE' or 'BOTH' to specify where to log, by defaults logs to LOCAL
  */
-export function myLogger(content: any, destination?: string ): void {
+export async function myLogger(content: any, destination?: string ): Promise<void> {
     let logChannel: Discord.TextChannel = client.channels.get(configAdmin.logChannel) as Discord.TextChannel;
     if (content != undefined || content != null) {  //Need to remember  null value checks TODO: Check if this can be simplified to one condition
         switch (destination) {
@@ -65,11 +65,11 @@ export function myLogger(content: any, destination?: string ): void {
                 console.log(content);
                 break;
             case 'REMOTE':
-                logChannel.send(content.toString());
+                await logChannel.send(content.toString());
                 break;
             case 'BOTH':
                 console.log(content);
-                logChannel.send(content.toString());
+                await logChannel.send(content.toString());
                 break;
             default:
                 console.log(content);
