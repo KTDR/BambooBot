@@ -12,7 +12,7 @@
     "start": "node build/index.js",
     "tester": "tsc & node build/tester.js",
     "go": "tsc & node build/index.js",
-    "perpetual": "tsc & npx pm2 start build/index.js --no-daemon --kill-timeout 70000 --shutdown-with-message"
+    "nonstop": "tsc & npx pm2 start build/index.js --no-daemon --kill-timeout 70000 --shutdown-with-message"
   },
   "author": "",
   "license": "ISC",
