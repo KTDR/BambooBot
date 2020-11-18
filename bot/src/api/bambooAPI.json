@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "users",
+      "description": "For operations on user objects"
+    }
+  ],
+  "info": {
+    "title": "Bamboo Database",
+    "description": "For interfacing with the Bamboo Bot database. You can use `testing` as your General Use API key to test any read-only functions.\n\nOpenAPI v3 spec file constructed using [Stoplight Studio](https://stoplight.io)",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "https://ltasus.asuscomm.com:3333/v1"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users in database",
+        "description": "Returns an array of names of all users in the database",
+        "operationId": "get-users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      "John Smith",
+                      "Mary Sue",
+                      "Victoria Lee"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new user to the database",
+        "description": "Adds a user to the database with the supplied name",
+        "operationId": "addUser",
+        "requestBody": {
+          "description": "Name of the user to add to the database",
+          "content": {
+            "application/json": {
+              "schema": {
+                "minLength": 1,
+                "type": "string",
+                "description": "",
+                "example": "Robert Smith"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "Admin_Key": []
+          }
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "description": "Delete a user with supplied name from the database",
+        "operationId": "delete-users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "Admin_Key": []
+          }
+        ],
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete a user from the database"
+      }
+    },
+    "/users/{name}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get assignments for user",
+        "description": "Get assignments for a user with specified name",
+        "operationId": "get-user",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of user to get assignments for, case-sensitive",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Assignment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add assignments for user",
+        "description": "Add an assignment for a user",
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of user to get assignments for, case-sensitive",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Assignment to add to user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Assignment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "successful operation",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "users"
+        ],
+        "security": [
+          {
+            "Admin_Key": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Delete the user with specified name",
+        "operationId": "delete-users-name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of user to get assignments for, case-sensitive",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Admin_Key": []
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/overview": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get all users and their assignment count",
+        "description": "Get an object containing the name of each user and the number of assignments they have",
+        "operationId": "get-overview",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverviewObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "John Smith",
+            "assignments": [
+              {
+                "name": "Book_Report",
+                "due_date": "2021-01-05T00:00:00.000Z"
+              },
+              {
+                "name": "Group presentation",
+                "due_date": "2021-04-08T00:00:00.000Z"
+              }
+            ]
+          }
+        },
+        "title": "User",
+        "description": "Represents a user in the Database",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Assignment"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "title": "ApiResponse",
+        "description": "Wrapper for all API responses, not used as of yet"
+      },
+      "Assignment": {
+        "title": "Assignment",
+        "required": [
+          "due_date",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Book_Report"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date",
+            "example": "2021-01-05"
+          }
+        },
+        "x-examples": {
+          "example-1": {
+            "name": "Book_Report",
+            "due_date": "2021-01-05"
+          }
+        },
+        "description": "An Assignment, linked to a user in the DB backend"
+      },
+      "OverviewObject": {
+        "title": "OverviewObject",
+        "type": "array",
+        "description": "Names of users and the number of assignments for each",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "assignment_count": {
+              "type": "integer"
+            }
+          }
+        },
+        "x-examples": {
+          "example-1": [
+            {
+              "name": "Mary Sue",
+              "assignment_count": 3
+            },
+            {
+              "name": "John Smith",
+              "assignment_count": 0
+            },
+            {
+              "name": "Victoria Lee",
+              "assignment_count": 1
+            }
+          ]
+        }
+      }
+    },
+    "securitySchemes": {
+      "Admin_Key": {
+        "type": "apiKey",
+        "description": "For write access to the database.",
+        "name": "api_key",
+        "in": "header"
+      },
+      "General_Key": {
+        "type": "apiKey",
+        "description": "For read only access to the database",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "General_Key": []
+    }
+  ]
+}
