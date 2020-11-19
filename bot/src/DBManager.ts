@@ -20,7 +20,7 @@ class DBManager {
         let DBpassword = creds.MongoDB_password;
         let connectionURL = `mongodb+srv://${DBusername}:${DBpassword}@${cluster}.88lzo.azure.mongodb.net/${DBname}?retryWrites=true&w=majority`;
         mongoose.connect(connectionURL, { useNewUrlParser: true , useUnifiedTopology: true}) //Connect to MongoDB Atlas instance
-        .then(() => console.log("Database connected."))
+        .then(() => console.log("Database connection established."))
         .catch(error => console.error("Failed to connect to database " + error));   
         this.connection = mongoose.connection;
         this.connection.on('error', console.error.bind(console, 'MongoDB connection error:')); //Bind any connection error events to the console error output

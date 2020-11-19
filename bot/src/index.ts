@@ -2,12 +2,15 @@
 import Discord from "discord.js";  //imports Discord client class TYPESCRIPT SPECIFIC https://www.typescriptlang.org/docs/handbook/modules.html
 import fs from 'fs';
 import path from 'path';
+import { APIServer } from './api/server';
 import Util = require('./MyDiscordUtils') ; //importing frequently used functions 
 import DBManager = require("./DBManager");
+
 
 const client = new Discord.Client();    //initializes discord.js client object
 var owner: Discord.User = undefined;   //to hold discord user object for bot owner, user ID hardcoded into config.json for now.
 var DB: DBManager;  
+var API: APIServer;
 
 const config = Util.getYAMLObj(path.join(__dirname,'..','config','config-admin.yaml'));    //Load the Bot configuration
 const creds = Util.getYAMLObj(path.join(__dirname,'..','config','creds.yaml'));    //Load in credentials //Content of this variable should NEVER be exposed to users
@@ -30,6 +33,8 @@ client.on('ready', async () => {  //activates when bot starts up, and logs its n
         });
     //Post-login initialization tasks here
     DB = new DBManager();
+    API = new APIServer();
+    API.launch();
     setActivity();
 
 });
@@ -264,4 +269,4 @@ process.on('message', async function(msg) {
     await Util.myLogger('Received shutdown signal from PM2', 'BOTH');
     process.exit();
 });
-export { client as DiscordClient}; 
+export { client as DiscordClient, DB as DBClient}; 

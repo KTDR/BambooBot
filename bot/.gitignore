@@ -118,6 +118,9 @@ dist
 # Prevent credentials from being pushed to repo
 creds.*
 
+# Security folder contains certs and keys needed for HTTPS and shouldn't be publicly accessible.
+/security
+
 # Don't need Typescript compiler output pushed to repo, that should be compiled when needed
 /build
 
