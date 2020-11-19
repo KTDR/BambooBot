@@ -126,3 +126,6 @@ creds.*
 
 # Just personal links and coding info that I don't need pushed to the repo
 myresources.txt
+
+# For deployment of service, archives might contain sensitive info so don't push to repo for now
+/deploy
